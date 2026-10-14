@@ -1,0 +1,4 @@
+2026-10-14 13:04:31,017 - request - INFO - GET: http://localhost:8084/sprints
+2026-10-14 13:04:31,027 - request - INFO - Status: 200
+2026-10-14 13:04:31,028 - request - INFO - PUT: http://localhost:8084/sprints/5/start, params: {'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW1vX3NtIiwicm9sZSI6IlNDUlVNX01BU1RFUiIsInVzZXJJZCI6MiwiaWF0IjoxNzkxOTgzMDcwLCJleHAiOjE3OTIwNjk0NzB9.WBaVl0a8S7IWtz5JSoykWVGZ-z8NCaWrjawaiTvXBJ8'}}
+2026-10-14 13:04:31,038 - request - INFO - Status: 200

@@ -1,0 +1,4 @@
+2026-10-14 13:04:30,970 - request - INFO - GET: http://localhost:8084/sprints
+2026-10-14 13:04:30,978 - request - INFO - Status: 200
+2026-10-14 13:04:30,979 - request - INFO - GET: http://localhost:8084/kanban/board?sprintId=1
+2026-10-14 13:04:30,989 - request - INFO - Status: 200

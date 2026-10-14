@@ -1,0 +1,5 @@
+2026-10-14 13:04:31,200 - request - INFO - POST: http://localhost:8084/auth/login, params: {'json': {'username': 'demo_sm', 'password': 'password'}}
+2026-10-14 13:04:31,275 - request - INFO - Status: 200
+2026-10-14 13:04:31,276 - database - INFO - Query: SELECT id, username, role, email, nickname FROM user WHERE username = %s, params: ('demo_sm',)
+2026-10-14 13:04:31,276 - database - INFO - DB: localhost:3307/agile
+2026-10-14 13:04:31,296 - database - INFO - Result: 1 rows

@@ -1,0 +1,3 @@
+INFO     request:request_util.py:14 GET: http://localhost:8084/tasks
+INFO     request:request_util.py:18 Status: 200
+DEBUG    request:request_util.py:19 Body: {"code":200,"message":"操作成功","data":[{"id":1,"title":"支付渠道：微信 SDK 集成","description":"配置商户号与证书","priority":"HIGH","status":"DONE","assigneeId":3,"storyPoints":8,"sprintId":1,"storyId":4,"createdAt":[2026,10,14,13,3,27],"updatedAt":[2026,10,8,13,3,27]},{"id":2,"title":"支付渠道：支付宝当面付","description":"扫码与异步通知","priority":"HIGH","status":"DONE","assigneeId":3,"storyPoints":5,"sprintId":1,"storyId":4,"createdAt":[2026,10,14,13,3,27],"updatedAt":[2026,10,10,13,3,27]},{"id":3,"title":"对账文件解析","description"

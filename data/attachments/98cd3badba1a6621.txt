@@ -1,0 +1,4 @@
+2026-10-14 13:04:30,991 - request - INFO - GET: http://localhost:8084/projects
+2026-10-14 13:04:31,002 - request - INFO - Status: 200
+2026-10-14 13:04:31,002 - request - INFO - POST: http://localhost:8084/sprints, params: {'json': {'projectId': 1, 'name': 'SM Test Sprint', 'startDate': '2024-01-01', 'endDate': '2024-01-14', 'goal': ''}, 'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW1vX3NtIiwicm9sZSI6IlNDUlVNX01BU1RFUiIsInVzZXJJZCI6MiwiaWF0IjoxNzkxOTgzMDcwLCJleHAiOjE3OTIwNjk0NzB9.WBaVl0a8S7IWtz5JSoykWVGZ-z8NCaWrjawaiTvXBJ8'}}
+2026-10-14 13:04:31,014 - request - INFO - Status: 200

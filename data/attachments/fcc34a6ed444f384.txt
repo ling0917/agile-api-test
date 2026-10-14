@@ -1,0 +1,4 @@
+2026-10-14 13:04:30,848 - request - INFO - POST: http://localhost:8084/auth/login, params: {'json': {'username': 'demo_sm', 'password': 'password'}}
+2026-10-14 13:04:30,921 - request - INFO - Status: 200
+2026-10-14 13:04:30,922 - request - INFO - GET: http://localhost:8084/projects
+2026-10-14 13:04:30,928 - request - INFO - Status: 200

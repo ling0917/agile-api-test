@@ -1,0 +1,1 @@
+{"code":200,"message":"操作成功","data":{"token":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW1vX2RldiIsInJvbGUiOiJERVZFTE9QRVIiLCJ1c2VySWQiOjMsImlhdCI6MTc5MTk4MzA3MSwiZXhwIjoxNzkyMDY5NDcxfQ.o1N5PpBcc_QZs_4GAXLokgk0UCXc4WnCkyPOD_fSf04","username":"demo_dev","role":"DEVELOPER","email":"dev@demo.local","message":"登录成功"},"timestamp":1791983071372}

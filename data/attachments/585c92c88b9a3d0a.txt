@@ -1,0 +1,7 @@
+INFO     request:request_util.py:31 POST: http://localhost:8084/auth/login, params: {'json': {'username': 'demo_dev', 'password': 'password'}}
+INFO     request:request_util.py:35 Status: 200
+DEBUG    request:request_util.py:36 Body: {"code":200,"message":"操作成功","data":{"token":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW1vX2RldiIsInJvbGUiOiJERVZFTE9QRVIiLCJ1c2VySWQiOjMsImlhdCI6MTc5MTk4MzA3MSwiZXhwIjoxNzkyMDY5NDcxfQ.o1N5PpBcc_QZs_4GAXLokgk0UCXc4WnCkyPOD_fSf04","username":"demo_dev","role":"DEVELOPER","email":"dev@demo.local","message":"登录成功"},"timestamp":1791983071372}
+INFO     database:db_util.py:29 Query: SELECT id, username, role, email, nickname FROM user WHERE username = %s, params: ('demo_dev',)
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:35 Result: 1 rows
+DEBUG    database:db_util.py:42 DB closed

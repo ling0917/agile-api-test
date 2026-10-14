@@ -1,0 +1,6 @@
+INFO     request:request_util.py:31 POST: http://localhost:8084/auth/login, params: {'json': {'username': 'demo_po', 'password': 'password'}}
+INFO     request:request_util.py:35 Status: 200
+DEBUG    request:request_util.py:36 Body: {"code":200,"message":"操作成功","data":{"token":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW1vX3BvIiwicm9sZSI6IlBST0RVQ1RfT1dORVIiLCJ1c2VySWQiOjEsImlhdCI6MTc5MTk4MzA3MCwiZXhwIjoxNzkyMDY5NDcwfQ.RCFoXpZ_NQxWX7N3153WVXsTzhhAgDkp5tRFLkpL0tg","username":"demo_po","role":"PRODUCT_OWNER","email":"po@demo.local","message":"登录成功"},"timestamp":1791983070758}
+INFO     request:request_util.py:31 POST: http://localhost:8084/projects, params: {'json': {'name': 'Test Project', 'description': 'Test desc'}, 'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW1vX3BvIiwicm9sZSI6IlBST0RVQ1RfT1dORVIiLCJ1c2VySWQiOjEsImlhdCI6MTc5MTk4MzA3MCwiZXhwIjoxNzkyMDY5NDcwfQ.RCFoXpZ_NQxWX7N3153WVXsTzhhAgDkp5tRFLkpL0tg'}}
+INFO     request:request_util.py:35 Status: 200
+DEBUG    request:request_util.py:36 Body: {"code":200,"message":"操作成功","data":1,"timestamp":1791983070771}
