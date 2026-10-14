@@ -50,6 +50,7 @@ CI/CD 流水线
 部署到 GitHub Pages
 报告地址
 点击查看最新测试报告
+https://ling0917.github.io/agile-api-test/
 测试覆盖模块
 [x] 用户模块（登录、用户信息）
 [x] 项目模块（项目 CRUD）
