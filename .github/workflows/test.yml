@@ -9,14 +9,61 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: 123456
+          MYSQL_DATABASE: agile
+        ports:
+          - 3307:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+    
     steps:
-      - name: Checkout Code
+      - name: Checkout Test Code
         uses: actions/checkout@v4
       
-      - name: Unzip Project
+      - name: Checkout Backend Code
+        uses: actions/checkout@v4
+        with:
+          repository: ling0917/agile-backend
+          path: backend
+      
+      - name: Unzip Backend
+        run: |
+          cd backend
+          unzip agile.zip
+          ls -la
+      
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      
+      - name: Build Backend
+        run: |
+          cd backend/agile
+          mvn clean package -DskipTests
+      
+      - name: Start Backend
+        run: |
+          cd backend/agile
+          java -jar target/agile-1.0-SNAPSHOT.jar &
+          sleep 60
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3307/agile?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+          SPRING_DATASOURCE_USERNAME: root
+          SPRING_DATASOURCE_PASSWORD: 123456
+      
+      - name: Unzip Test Project
         run: |
           unzip project.zip
-          ls -la
       
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -28,25 +75,28 @@ jobs:
           cd project
           pip install -r requirements.txt
       
-      - name: Check Project Structure
+      - name: Run Tests
         run: |
           cd project
-          echo "=== Project Structure ==="
-          ls -la
-          echo "=== API Folder ==="
-          ls api/
-          echo "=== Testcases Folder ==="
-          ls testcases/
+          python -m pytest testcases/ -v --alluredir=reports/allure-results
       
-      - name: Verify Python Syntax
-        run: |
-          cd project
-          python -m py_compile api/*.py
-          python -m py_compile testcases/*.py
-          python -m py_compile utils/*.py
-      
-      - name: Upload Project Files
+      - name: Upload Test Results
         uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: project-files
-          path: project/
+          name: test-results
+          path: project/reports/allure-results
+      
+      - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: project/reports/allure-results
+          allure_history: allure-history
+      
+      - name: Deploy to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-history
