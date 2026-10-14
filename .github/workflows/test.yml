@@ -85,10 +85,14 @@ jobs:
       
       - name: Test Backend Health
         run: |
-          for i in {1..10}; do
-            curl -s http://localhost:8084/auth/ping && echo " BACKEND OK" && break
-            echo "Waiting for backend... attempt $i"
-            sleep 5
+          for i in {1..30}; do
+            response=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8084/auth/ping || echo "000")
+            if [ "$response" = "200" ]; then
+              echo "✅ Backend is ready!"
+              break
+            fi
+            echo "⏳ Waiting for backend... attempt $i/30"
+            sleep 2
           done
       
       - name: Unzip Test Project
@@ -96,6 +100,14 @@ jobs:
           ls -la
           unzip -o project.zip
           ls -la project/
+          
+          # 清理旧文件
+          rm -f project/testcases/test_order.py 2>/dev/null || true
+          rm -f project/test_data.yaml 2>/dev/null || true
+          rm -rf project/.pytest_cache 2>/dev/null || true
+          
+          echo "=== Cleaned test files ==="
+          ls project/testcases/
       
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -110,10 +122,8 @@ jobs:
       - name: Run Tests
         run: |
           cd project
-          # 清理缓存
           rm -rf .pytest_cache
           rm -rf reports/allure-results/*
-          # 运行测试
           python -m pytest testcases/ -v --alluredir=reports/allure-results
       
       - name: Upload Test Results
@@ -127,17 +137,15 @@ jobs:
         if: always()
         run: |
           cd project
-          # 下载并安装 Allure
           wget -q https://github.com/allure-framework/allure2/releases/download/2.24.1/allure-2.24.1.tgz
           tar -xzf allure-2.24.1.tgz
           
-          # 生成报告（不带历史）
+          rm -rf reports/allure-results/*
+          python -m pytest testcases/ -v --alluredir=reports/allure-results
+          
           ./allure-2.24.1/bin/allure generate reports/allure-results -o allure-report --clean
           
-          # 验证
-          echo "=== Report files ==="
-          ls -la allure-report/
-          echo "=== Test cases ==="
+          echo "=== Test cases count ==="
           ls allure-report/data/test-cases/ | wc -l
       
       - name: Deploy to GitHub Pages
@@ -146,7 +154,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: project/allure-report
-          force_orphan: true  # ← 清空历史，只保留最新
+          force_orphan: true
       
       - name: Cleanup Docker
         if: always()
