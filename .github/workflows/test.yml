@@ -120,35 +120,21 @@ jobs:
           path: project/reports/allure-results
       
       - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@master
         if: always()
-        run: |
-          cd project
-          # 下载并安装 Allure
-          wget -q https://github.com/allure-framework/allure2/releases/download/2.24.1/allure-2.24.1.tgz
-          tar -xzf allure-2.24.1.tgz
-          # 生成报告
-          ./allure-2.24.1/bin/allure generate reports/allure-results -o allure-report --clean
-          ls -la allure-report/
+        with:
+          allure_results: project/reports/allure-results
+          allure_history: allure-history
       
       - name: Deploy to GitHub Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: project/allure-report
+          publish_dir: allure-history
       
       - name: Cleanup Docker
         if: always()
         run: |
-          # 找到正确的目录
-          if [ -d "backend/agile-upload/agile-upload" ]; then
-            cd backend/agile-upload/agile-upload
-          elif [ -d "backend/agile-upload" ]; then
-            cd backend/agile-upload
-          elif [ -d "backend" ]; then
-            cd backend
-          else
-            echo "No backend directory found, skipping cleanup"
-            exit 0
-          fi
+          cd backend/agile-upload/agile-upload 2>/dev/null || cd backend/agile-upload 2>/dev/null || cd backend
           docker compose down -v
