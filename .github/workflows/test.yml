@@ -110,6 +110,10 @@ jobs:
       - name: Run Tests
         run: |
           cd project
+          # 清理缓存
+          rm -rf .pytest_cache
+          rm -rf reports/allure-results/*
+          # 运行测试
           python -m pytest testcases/ -v --alluredir=reports/allure-results
       
       - name: Upload Test Results
@@ -127,17 +131,14 @@ jobs:
           wget -q https://github.com/allure-framework/allure2/releases/download/2.24.1/allure-2.24.1.tgz
           tar -xzf allure-2.24.1.tgz
           
-          # 检查结果
-          echo "=== Allure results ==="
-          ls reports/allure-results/ | wc -l
-          
-          # 生成报告（不用历史记录）
+          # 生成报告（不带历史）
           ./allure-2.24.1/bin/allure generate reports/allure-results -o allure-report --clean
           
-          # 验证报告
+          # 验证
           echo "=== Report files ==="
           ls -la allure-report/
-          ls allure-report/data/test-cases/ 2>/dev/null | head -10 || echo "No test-cases folder"
+          echo "=== Test cases ==="
+          ls allure-report/data/test-cases/ | wc -l
       
       - name: Deploy to GitHub Pages
         if: always()
@@ -145,7 +146,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: project/allure-report
-          force_orphan: true  # ← 关键：清空历史，只保留最新
+          force_orphan: true  # ← 清空历史，只保留最新
       
       - name: Cleanup Docker
         if: always()
