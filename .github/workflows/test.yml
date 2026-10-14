@@ -24,13 +24,31 @@ jobs:
           cd backend
           ls -la
           unzip -o agile-upload.zip
-          ls -la
-          echo "=== Docker folder ==="
-          ls -R docker/
+          echo "=== Check structure ==="
+          ls -R | grep -E "(docker-compose|docker/)" | head -20
       
       - name: Start Services with Docker Compose
         run: |
-          cd backend/agile-upload
+          # 找到正确的目录（解压后可能多了一层 agile-upload）
+          if [ -d "backend/agile-upload/agile-upload" ] && [ -f "backend/agile-upload/agile-upload/docker-compose.yml" ]; then
+            cd backend/agile-upload/agile-upload
+          elif [ -f "backend/agile-upload/docker-compose.yml" ]; then
+            cd backend/agile-upload
+          elif [ -f "backend/docker-compose.yml" ]; then
+            cd backend
+          else
+            echo "ERROR: docker-compose.yml not found!"
+            find backend -name "docker-compose.yml" -type f
+            exit 1
+          fi
+          
+          echo "=== Current directory ==="
+          pwd
+          echo "=== Files ==="
+          ls -la
+          echo "=== Docker folder ==="
+          ls -R docker/
+          
           # 创建 .env 文件
           cat > .env << EOF
           JWT_SECRET=${{ secrets.JWT_SECRET }}
@@ -38,14 +56,15 @@ jobs:
           SPRING_DATASOURCE_USERNAME=root
           SPRING_DATASOURCE_PASSWORD=123456
           EOF
-          cat .env
-          # 清理旧容器
-          docker compose down -v 2>/dev/null || true
+          
           # 启动服务
+          docker compose down -v 2>/dev/null || true
           docker compose up -d
+          
           # 等待服务就绪
           echo "Waiting for services..."
           sleep 60
+          
           # 检查状态
           echo "=== Docker PS ==="
           docker ps
@@ -56,9 +75,8 @@ jobs:
       
       - name: Test Backend Health
         run: |
-          # 测试后端是否响应
           for i in {1..10}; do
-            curl -s http://localhost:8084/auth/ping && echo "BACKEND OK" && break
+            curl -s http://localhost:8084/auth/ping && echo " BACKEND OK" && break
             echo "Waiting for backend... attempt $i"
             sleep 5
           done
@@ -94,5 +112,5 @@ jobs:
       - name: Cleanup Docker
         if: always()
         run: |
-          cd backend/agile-upload
+          cd backend/agile-upload/agile-upload 2>/dev/null || cd backend/agile-upload 2>/dev/null || cd backend
           docker compose down -v
