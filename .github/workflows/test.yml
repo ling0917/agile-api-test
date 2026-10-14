@@ -72,8 +72,8 @@ jobs:
       
       - name: Install Dependencies
         run: |
-          cd project
-          pip install -r requirements.txt
+           cd project
+          pip install pytest==8.3.3 allure-pytest==2.13.5 requests==2.32.3 PyYAML==6.0.2 pymysql==1.1.1
       
       - name: Run Tests
         run: |
