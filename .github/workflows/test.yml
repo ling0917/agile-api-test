@@ -9,20 +9,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
-    services:
-      mysql:
-        image: mysql:8
-        env:
-          MYSQL_ROOT_PASSWORD: 123456
-          MYSQL_DATABASE: agile
-        ports:
-          - 3307:3306
-        options: >-
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-    
     steps:
       - name: Checkout Test Code
         uses: actions/checkout@v4
@@ -37,33 +23,51 @@ jobs:
         run: |
           cd backend
           ls -la
-          unzip agile-upload.zip || unzip agile.zip || ls -R
+          unzip -o agile-upload.zip
+          ls -la
+          echo "=== Docker folder ==="
+          ls -R docker/
       
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      
-      - name: Build Backend
+      - name: Start Services with Docker Compose
         run: |
-          cd backend/agile-upload || cd backend/agile
-          mvn clean package -DskipTests
-      
-      - name: Start Backend
-        run: |
-          cd backend/agile-upload || cd backend/agile
-          java -jar target/agile-1.0-SNAPSHOT.jar &
+          cd backend/agile-upload
+          # 创建 .env 文件
+          cat > .env << EOF
+          JWT_SECRET=${{ secrets.JWT_SECRET }}
+          MYSQL_ROOT_PASSWORD=123456
+          SPRING_DATASOURCE_USERNAME=root
+          SPRING_DATASOURCE_PASSWORD=123456
+          EOF
+          cat .env
+          # 清理旧容器
+          docker compose down -v 2>/dev/null || true
+          # 启动服务
+          docker compose up -d
+          # 等待服务就绪
+          echo "Waiting for services..."
           sleep 60
-        env:
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3307/agile?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-          SPRING_DATASOURCE_USERNAME: root
-          SPRING_DATASOURCE_PASSWORD: 123456
+          # 检查状态
+          echo "=== Docker PS ==="
+          docker ps
+          echo "=== MySQL Logs ==="
+          docker logs agile-mysql 2>&1 | tail -20
+          echo "=== App Logs ==="
+          docker logs agile-app 2>&1 | tail -30
+      
+      - name: Test Backend Health
+        run: |
+          # 测试后端是否响应
+          for i in {1..10}; do
+            curl -s http://localhost:8084/auth/ping && echo "BACKEND OK" && break
+            echo "Waiting for backend... attempt $i"
+            sleep 5
+          done
       
       - name: Unzip Test Project
         run: |
-          unzip project.zip
+          ls -la
+          unzip -o project.zip
+          ls -la project/
       
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -73,7 +77,7 @@ jobs:
       - name: Install Dependencies
         run: |
           cd project
-          pip install pytest==8.3.3 allure-pytest==2.13.5 requests==2.32.3 PyYAML==6.0.2 pymysql==1.1.1
+          pip install pytest allure-pytest requests PyYAML pymysql
       
       - name: Run Tests
         run: |
@@ -86,3 +90,9 @@ jobs:
         with:
           name: test-results
           path: project/reports/allure-results
+      
+      - name: Cleanup Docker
+        if: always()
+        run: |
+          cd backend/agile-upload
+          docker compose down -v
