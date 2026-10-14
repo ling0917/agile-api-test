@@ -27,12 +27,17 @@ jobs:
       - name: Checkout Test Code
         uses: actions/checkout@v4
       
-      - name: Download Backend Code
+      - name: Checkout Backend Code
+        uses: actions/checkout@v4
+        with:
+          repository: ling0917/agile-backend
+          path: backend
+      
+      - name: Unzip Backend
         run: |
-          # 从后端仓库下载 zip
-          curl -L https://github.com/ling0917/agile-backend/archive/refs/heads/main.zip -o backend.zip
-          unzip backend.zip
+          cd backend
           ls -la
+          unzip agile-upload.zip || unzip agile.zip || ls -R
       
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -42,14 +47,12 @@ jobs:
       
       - name: Build Backend
         run: |
-          cd agile-backend-main
-          # 如果有子文件夹，进入
-          ls -la
-          mvn clean package -DskipTests || (cd agile && mvn clean package -DskipTests)
+          cd backend/agile-upload || cd backend/agile
+          mvn clean package -DskipTests
       
       - name: Start Backend
         run: |
-          cd agile-backend-main
+          cd backend/agile-upload || cd backend/agile
           java -jar target/agile-1.0-SNAPSHOT.jar &
           sleep 60
         env:
