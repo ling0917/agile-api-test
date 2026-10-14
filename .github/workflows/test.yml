@@ -27,16 +27,11 @@ jobs:
       - name: Checkout Test Code
         uses: actions/checkout@v4
       
-      - name: Checkout Backend Code
-        uses: actions/checkout@v4
-        with:
-          repository: ling0917/agile-backend
-          path: backend
-      
-      - name: Unzip Backend
+      - name: Download Backend Code
         run: |
-          cd backend
-          unzip agile.zip
+          # 从后端仓库下载 zip
+          curl -L https://github.com/ling0917/agile-backend/archive/refs/heads/main.zip -o backend.zip
+          unzip backend.zip
           ls -la
       
       - name: Set up JDK 17
@@ -47,12 +42,14 @@ jobs:
       
       - name: Build Backend
         run: |
-          cd backend/agile
-          mvn clean package -DskipTests
+          cd agile-backend-main
+          # 如果有子文件夹，进入
+          ls -la
+          mvn clean package -DskipTests || (cd agile && mvn clean package -DskipTests)
       
       - name: Start Backend
         run: |
-          cd backend/agile
+          cd agile-backend-main
           java -jar target/agile-1.0-SNAPSHOT.jar &
           sleep 60
         env:
@@ -86,17 +83,3 @@ jobs:
         with:
           name: test-results
           path: project/reports/allure-results
-      
-      - name: Generate Allure Report
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        with:
-          allure_results: project/reports/allure-results
-          allure_history: allure-history
-      
-      - name: Deploy to GitHub Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: allure-history
