@@ -35,7 +35,6 @@ jobs:
       
       - name: Build Backend JAR
         run: |
-          # 找到正确的目录
           if [ -d "backend/agile-upload/agile-upload" ] && [ -f "backend/agile-upload/agile-upload/pom.xml" ]; then
             cd backend/agile-upload/agile-upload
           elif [ -f "backend/agile-upload/pom.xml" ]; then
@@ -54,7 +53,6 @@ jobs:
       
       - name: Start Services with Docker Compose
         run: |
-          # 找到正确的目录
           if [ -d "backend/agile-upload/agile-upload" ] && [ -f "backend/agile-upload/agile-upload/docker-compose.yml" ]; then
             cd backend/agile-upload/agile-upload
           elif [ -f "backend/agile-upload/docker-compose.yml" ]; then
@@ -71,7 +69,6 @@ jobs:
           ls -la
           ls docker/mysql/init/
           
-          # 创建 .env
           cat > .env << EOF
           JWT_SECRET=${{ secrets.JWT_SECRET }}
           MYSQL_ROOT_PASSWORD=123456
@@ -79,7 +76,6 @@ jobs:
           SPRING_DATASOURCE_PASSWORD=123456
           EOF
           
-          # 启动（带 --build）
           docker compose down -v 2>/dev/null || true
           docker compose up -d --build
           
@@ -122,6 +118,20 @@ jobs:
         with:
           name: test-results
           path: project/reports/allure-results
+      
+      - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: project/reports/allure-results
+          allure_history: allure-history
+      
+      - name: Deploy to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-history
       
       - name: Cleanup Docker
         if: always()
