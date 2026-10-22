@@ -1,3 +1,4 @@
+# .github/workflows/api-test.yml
 name: API Automation Test
 
 on:
@@ -101,13 +102,23 @@ jobs:
           unzip -o project.zip
           ls -la project/
           
-          # 清理旧文件
-          rm -f project/testcases/test_order.py 2>/dev/null || true
-          rm -f project/test_data.yaml 2>/dev/null || true
+          # 只清理根目录的旧测试文件，保留 data/test_data.yaml
+          rm -f project/test_fixture.py 2>/dev/null || true
+          rm -f project/test_httpbin.py 2>/dev/null || true
+          rm -f project/test_order.py 2>/dev/null || true
+          rm -f project/test_parametrize.py 2>/dev/null || true
+          rm -f project/test_yaml.py 2>/dev/null || true
+          rm -f project/try.py 2>/dev/null || true
+          rm -f project/trypost.py 2>/dev/null || true
           rm -rf project/.pytest_cache 2>/dev/null || true
+          rm -rf project/__pycache__ 2>/dev/null || true
+          rm -rf project/testcases/__pycache__ 2>/dev/null || true
+          rm -rf project/testcases/base/__pycache__ 2>/dev/null || true
           
           echo "=== Cleaned test files ==="
           ls project/testcases/
+          echo "=== Data files ==="
+          ls project/data/
       
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -140,9 +151,7 @@ jobs:
           wget -q https://github.com/allure-framework/allure2/releases/download/2.24.1/allure-2.24.1.tgz
           tar -xzf allure-2.24.1.tgz
           
-          rm -rf reports/allure-results/*
-          python -m pytest testcases/ -v --alluredir=reports/allure-results
-          
+          # 直接用之前的结果，不重新跑测试
           ./allure-2.24.1/bin/allure generate reports/allure-results -o allure-report --clean
           
           echo "=== Test cases count ==="
