@@ -1,0 +1,1 @@
+[{"values":["Agile API Test"],"name":"Project"},{"values":["local"],"name":"Environment"},{"values":["URL=http://localhost:8084"],"name":"Base"},{"values":["localhost:3307/agile"],"name":"Database"},{"values":["3.14.8"],"name":"Python"},{"values":["9.1.1"],"name":"pytest"}]

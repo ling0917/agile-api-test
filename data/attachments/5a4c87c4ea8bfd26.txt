@@ -1,0 +1,38 @@
+INFO     request:request_util.py:14 GET: http://localhost:8084/sprints
+INFO     request:request_util.py:18 Status: 200
+DEBUG    request:request_util.py:19 Body: {"code":200,"message":"操作成功","data":[{"id":1,"name":"Sprint 12 · 支付与结算","description":"完成微信/支付宝对接与对账 MVP","goal":null,"startDate":[2026,10,15],"endDate":[2026,10,29],"status":"ACTIVE","projectId":1,"capacity":null,"totalStoryPoints":40,"createdAt":[2026,10,22,8,52,6],"updatedAt":[2026,10,22,8,53,7],"days":15},{"id":2,"name":"Sprint 13 · 会员成长体系","description":"等级规则与积分商城一期","goal":null,"startDate":[2026,10,25],"endDate":[2026,11,8],"status":"PLANNING","projectId":1,"capacity":null,"totalStoryPoint
+INFO     request:request_util.py:31 POST: http://localhost:8084/stories, params: {'json': {'sprintId': 1, 'title': 'PO_Test_Story_DB', 'description': 'desc', 'storyPoint': 5, 'priority': 'HIGH'}, 'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW1vX3BvIiwicm9sZSI6IlBST0RVQ1RfT1dORVIiLCJ1c2VySWQiOjEsImlhdCI6MTc5MjY1OTE4NSwiZXhwIjoxNzkyNzQ1NTg1fQ.O1HynAh32iRMLwsQGV0TNoami7IuhHu7vXRbNCp6JQw'}}
+INFO     request:request_util.py:35 Status: 200
+DEBUG    request:request_util.py:36 Body: {"code":200,"message":"操作成功","data":{"id":200,"projectId":1,"sprintId":1,"title":"PO_Test_Story_DB","storyPoint":5,"status":"TODO","description":"desc","priority":"HIGH","createTime":[2026,10,22,8,53,6,997101751]},"timestamp":1792659186999}
+INFO     database:db_util.py:29 Query: SELECT * FROM story WHERE title = %s, params: ('PO_Test_Story_DB',)
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:35 Result: 1 rows
+DEBUG    database:db_util.py:42 DB closed
+INFO     database:db_util.py:29 Query: SELECT title FROM story WHERE title = %s, params: ('PO_Test_Story_DB',)
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:35 Result: 1 rows
+DEBUG    database:db_util.py:42 DB closed
+INFO     database:db_util.py:29 Query: SELECT status FROM story WHERE title = %s, params: ('PO_Test_Story_DB',)
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:35 Result: 1 rows
+DEBUG    database:db_util.py:42 DB closed
+INFO     database:db_util.py:29 Query: SELECT priority FROM story WHERE title = %s, params: ('PO_Test_Story_DB',)
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:35 Result: 1 rows
+DEBUG    database:db_util.py:42 DB closed
+INFO     database:db_util.py:29 Query: SELECT sprint_id FROM story WHERE title = %s, params: ('PO_Test_Story_DB',)
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:35 Result: 1 rows
+DEBUG    database:db_util.py:42 DB closed
+INFO     database:db_util.py:46 Update: DELETE FROM project WHERE name LIKE %s OR name LIKE %s OR name = %s, params: ('PO_Test_%', 'SM_Test_%', 'DuplicateTest')
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:52 Affected: 0
+DEBUG    database:db_util.py:60 DB closed
+INFO     database:db_util.py:46 Update: DELETE FROM story WHERE title LIKE %s OR title LIKE %s, params: ('PO_Test_%', 'SM_Test_%')
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:52 Affected: 1
+DEBUG    database:db_util.py:60 DB closed
+INFO     database:db_util.py:46 Update: DELETE FROM sprint WHERE name LIKE %s, params: ('SM_Test_%',)
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:52 Affected: 0
+DEBUG    database:db_util.py:60 DB closed

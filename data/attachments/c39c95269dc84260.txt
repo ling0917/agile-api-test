@@ -1,0 +1,15 @@
+2026-10-22 08:53:05,238 - request - INFO - POST: http://localhost:8084/auth/login, params: {'json': {'username': 'demo_po', 'password': 'password'}}
+2026-10-22 08:53:05,329 - request - INFO - Status: 200
+2026-10-22 08:53:05,330 - request - INFO - GET: http://localhost:8084/projects
+2026-10-22 08:53:05,354 - request - INFO - Status: 200
+2026-10-22 08:53:05,354 - request - INFO - POST: http://localhost:8084/sprints, params: {'json': {'projectId': 1, 'name': 'PO的迭代', 'startDate': '2024-01-01', 'endDate': '2024-01-14', 'goal': ''}, 'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW1vX3BvIiwicm9sZSI6IlBST0RVQ1RfT1dORVIiLCJ1c2VySWQiOjEsImlhdCI6MTc5MjY1OTE4NSwiZXhwIjoxNzkyNzQ1NTg1fQ.O1HynAh32iRMLwsQGV0TNoami7IuhHu7vXRbNCp6JQw'}}
+2026-10-22 08:53:05,368 - request - INFO - Status: 403
+2026-10-22 08:53:05,369 - database - INFO - Update: DELETE FROM project WHERE name LIKE %s OR name LIKE %s OR name = %s, params: ('PO_Test_%', 'SM_Test_%', 'DuplicateTest')
+2026-10-22 08:53:05,369 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:05,392 - database - INFO - Affected: 0
+2026-10-22 08:53:05,392 - database - INFO - Update: DELETE FROM story WHERE title LIKE %s OR title LIKE %s, params: ('PO_Test_%', 'SM_Test_%')
+2026-10-22 08:53:05,393 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:05,414 - database - INFO - Affected: 0
+2026-10-22 08:53:05,415 - database - INFO - Update: DELETE FROM sprint WHERE name LIKE %s, params: ('SM_Test_%',)
+2026-10-22 08:53:05,415 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:05,436 - database - INFO - Affected: 0

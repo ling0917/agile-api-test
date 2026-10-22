@@ -1,0 +1,19 @@
+INFO     request:request_util.py:31 POST: http://localhost:8084/auth/login, params: {'json': {'username': 'demo_sm', 'password': 'password'}}
+INFO     request:request_util.py:35 Status: 200
+DEBUG    request:request_util.py:36 Body: {"code":200,"message":"操作成功","data":{"token":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW1vX3NtIiwicm9sZSI6IlNDUlVNX01BU1RFUiIsInVzZXJJZCI6MiwiaWF0IjoxNzkyNjU5MTg4LCJleHAiOjE3OTI3NDU1ODh9.-7n6txu6PLI3zor-YlGEd5dv6zZtr_p-IU8ifu5DjqI","username":"demo_sm","role":"SCRUM_MASTER","email":"sm@demo.local","message":"登录成功"},"timestamp":1792659188516}
+INFO     database:db_util.py:29 Query: SELECT id, username, role, email, nickname FROM user WHERE username = %s, params: ('demo_sm',)
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:35 Result: 1 rows
+DEBUG    database:db_util.py:42 DB closed
+INFO     database:db_util.py:46 Update: DELETE FROM project WHERE name LIKE %s OR name LIKE %s OR name = %s, params: ('PO_Test_%', 'SM_Test_%', 'DuplicateTest')
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:52 Affected: 0
+DEBUG    database:db_util.py:60 DB closed
+INFO     database:db_util.py:46 Update: DELETE FROM story WHERE title LIKE %s OR title LIKE %s, params: ('PO_Test_%', 'SM_Test_%')
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:52 Affected: 0
+DEBUG    database:db_util.py:60 DB closed
+INFO     database:db_util.py:46 Update: DELETE FROM sprint WHERE name LIKE %s, params: ('SM_Test_%',)
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:52 Affected: 0
+DEBUG    database:db_util.py:60 DB closed

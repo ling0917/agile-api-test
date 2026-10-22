@@ -1,0 +1,13 @@
+2026-10-22 08:53:06,640 - request - INFO - GET: http://localhost:8084/sprints
+2026-10-22 08:53:06,662 - request - INFO - Status: 200
+2026-10-22 08:53:06,662 - request - INFO - PUT: http://localhost:8084/sprints/1/start, params: {'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW1vX3NtIiwicm9sZSI6IlNDUlVNX01BU1RFUiIsInVzZXJJZCI6MiwiaWF0IjoxNzkyNjU5MTg0LCJleHAiOjE3OTI3NDU1ODR9.3Ymc0w3gGyEjeGZeSO8yoFAdzrNvgXQMlIjCQmZynaQ'}}
+2026-10-22 08:53:06,682 - request - INFO - Status: 200
+2026-10-22 08:53:06,684 - database - INFO - Update: DELETE FROM project WHERE name LIKE %s OR name LIKE %s OR name = %s, params: ('PO_Test_%', 'SM_Test_%', 'DuplicateTest')
+2026-10-22 08:53:06,684 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:06,705 - database - INFO - Affected: 0
+2026-10-22 08:53:06,706 - database - INFO - Update: DELETE FROM story WHERE title LIKE %s OR title LIKE %s, params: ('PO_Test_%', 'SM_Test_%')
+2026-10-22 08:53:06,706 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:06,728 - database - INFO - Affected: 0
+2026-10-22 08:53:06,728 - database - INFO - Update: DELETE FROM sprint WHERE name LIKE %s, params: ('SM_Test_%',)
+2026-10-22 08:53:06,728 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:06,750 - database - INFO - Affected: 0

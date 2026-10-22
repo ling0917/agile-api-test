@@ -1,0 +1,15 @@
+INFO     request:request_util.py:31 POST: http://localhost:8084/auth/login, params: {'json': {'username': 'not_exist_user_12345', 'password': 'password'}}
+INFO     request:request_util.py:35 Status: 200
+DEBUG    request:request_util.py:36 Body: {"code":200,"message":"操作成功","data":{"token":null,"username":null,"role":null,"email":null,"message":"用户不存在"},"timestamp":1792659184772}
+INFO     database:db_util.py:46 Update: DELETE FROM project WHERE name LIKE %s OR name LIKE %s OR name = %s, params: ('PO_Test_%', 'SM_Test_%', 'DuplicateTest')
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:52 Affected: 0
+DEBUG    database:db_util.py:60 DB closed
+INFO     database:db_util.py:46 Update: DELETE FROM story WHERE title LIKE %s OR title LIKE %s, params: ('PO_Test_%', 'SM_Test_%')
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:52 Affected: 0
+DEBUG    database:db_util.py:60 DB closed
+INFO     database:db_util.py:46 Update: DELETE FROM sprint WHERE name LIKE %s, params: ('SM_Test_%',)
+INFO     database:db_util.py:12 DB: localhost:3307/agile
+INFO     database:db_util.py:52 Affected: 0
+DEBUG    database:db_util.py:60 DB closed

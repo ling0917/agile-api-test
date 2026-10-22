@@ -1,0 +1,20 @@
+2026-10-22 08:53:06,821 - request - INFO - POST: http://localhost:8084/projects, params: {'json': {'name': 'PO_Test_Project_DB', 'description': 'Test desc for DB verify'}, 'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW1vX3BvIiwicm9sZSI6IlBST0RVQ1RfT1dORVIiLCJ1c2VySWQiOjEsImlhdCI6MTc5MjY1OTE4NSwiZXhwIjoxNzkyNzQ1NTg1fQ.O1HynAh32iRMLwsQGV0TNoami7IuhHu7vXRbNCp6JQw'}}
+2026-10-22 08:53:06,833 - request - INFO - Status: 200
+2026-10-22 08:53:06,834 - database - INFO - Query: SELECT * FROM project WHERE name = %s, params: ('PO_Test_Project_DB',)
+2026-10-22 08:53:06,834 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:06,856 - database - INFO - Result: 1 rows
+2026-10-22 08:53:06,857 - database - INFO - Query: SELECT name FROM project WHERE name = %s, params: ('PO_Test_Project_DB',)
+2026-10-22 08:53:06,857 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:06,879 - database - INFO - Result: 1 rows
+2026-10-22 08:53:06,879 - database - INFO - Query: SELECT description FROM project WHERE name = %s, params: ('PO_Test_Project_DB',)
+2026-10-22 08:53:06,880 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:06,901 - database - INFO - Result: 1 rows
+2026-10-22 08:53:06,903 - database - INFO - Update: DELETE FROM project WHERE name LIKE %s OR name LIKE %s OR name = %s, params: ('PO_Test_%', 'SM_Test_%', 'DuplicateTest')
+2026-10-22 08:53:06,903 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:06,925 - database - INFO - Affected: 1
+2026-10-22 08:53:06,926 - database - INFO - Update: DELETE FROM story WHERE title LIKE %s OR title LIKE %s, params: ('PO_Test_%', 'SM_Test_%')
+2026-10-22 08:53:06,926 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:06,947 - database - INFO - Affected: 0
+2026-10-22 08:53:06,948 - database - INFO - Update: DELETE FROM sprint WHERE name LIKE %s, params: ('SM_Test_%',)
+2026-10-22 08:53:06,948 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:06,969 - database - INFO - Affected: 0

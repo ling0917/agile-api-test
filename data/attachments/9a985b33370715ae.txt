@@ -1,0 +1,11 @@
+2026-10-22 08:53:05,507 - request - INFO - POST: http://localhost:8084/projects, params: {'json': {'name': '', 'description': ''}, 'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW1vX3BvIiwicm9sZSI6IlBST0RVQ1RfT1dORVIiLCJ1c2VySWQiOjEsImlhdCI6MTc5MjY1OTE4NSwiZXhwIjoxNzkyNzQ1NTg1fQ.O1HynAh32iRMLwsQGV0TNoami7IuhHu7vXRbNCp6JQw'}}
+2026-10-22 08:53:05,531 - request - INFO - Status: 200
+2026-10-22 08:53:05,533 - database - INFO - Update: DELETE FROM project WHERE name LIKE %s OR name LIKE %s OR name = %s, params: ('PO_Test_%', 'SM_Test_%', 'DuplicateTest')
+2026-10-22 08:53:05,534 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:05,558 - database - INFO - Affected: 0
+2026-10-22 08:53:05,559 - database - INFO - Update: DELETE FROM story WHERE title LIKE %s OR title LIKE %s, params: ('PO_Test_%', 'SM_Test_%')
+2026-10-22 08:53:05,560 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:05,595 - database - INFO - Affected: 0
+2026-10-22 08:53:05,596 - database - INFO - Update: DELETE FROM sprint WHERE name LIKE %s, params: ('SM_Test_%',)
+2026-10-22 08:53:05,596 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:05,632 - database - INFO - Affected: 0

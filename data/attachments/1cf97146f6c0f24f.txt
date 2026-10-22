@@ -1,0 +1,28 @@
+2026-10-22 08:53:06,972 - request - INFO - GET: http://localhost:8084/sprints
+2026-10-22 08:53:06,988 - request - INFO - Status: 200
+2026-10-22 08:53:06,988 - request - INFO - POST: http://localhost:8084/stories, params: {'json': {'sprintId': 1, 'title': 'PO_Test_Story_DB', 'description': 'desc', 'storyPoint': 5, 'priority': 'HIGH'}, 'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW1vX3BvIiwicm9sZSI6IlBST0RVQ1RfT1dORVIiLCJ1c2VySWQiOjEsImlhdCI6MTc5MjY1OTE4NSwiZXhwIjoxNzkyNzQ1NTg1fQ.O1HynAh32iRMLwsQGV0TNoami7IuhHu7vXRbNCp6JQw'}}
+2026-10-22 08:53:07,002 - request - INFO - Status: 200
+2026-10-22 08:53:07,003 - database - INFO - Query: SELECT * FROM story WHERE title = %s, params: ('PO_Test_Story_DB',)
+2026-10-22 08:53:07,003 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:07,026 - database - INFO - Result: 1 rows
+2026-10-22 08:53:07,027 - database - INFO - Query: SELECT title FROM story WHERE title = %s, params: ('PO_Test_Story_DB',)
+2026-10-22 08:53:07,027 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:07,048 - database - INFO - Result: 1 rows
+2026-10-22 08:53:07,049 - database - INFO - Query: SELECT status FROM story WHERE title = %s, params: ('PO_Test_Story_DB',)
+2026-10-22 08:53:07,049 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:07,070 - database - INFO - Result: 1 rows
+2026-10-22 08:53:07,071 - database - INFO - Query: SELECT priority FROM story WHERE title = %s, params: ('PO_Test_Story_DB',)
+2026-10-22 08:53:07,071 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:07,092 - database - INFO - Result: 1 rows
+2026-10-22 08:53:07,093 - database - INFO - Query: SELECT sprint_id FROM story WHERE title = %s, params: ('PO_Test_Story_DB',)
+2026-10-22 08:53:07,093 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:07,115 - database - INFO - Result: 1 rows
+2026-10-22 08:53:07,117 - database - INFO - Update: DELETE FROM project WHERE name LIKE %s OR name LIKE %s OR name = %s, params: ('PO_Test_%', 'SM_Test_%', 'DuplicateTest')
+2026-10-22 08:53:07,117 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:07,138 - database - INFO - Affected: 0
+2026-10-22 08:53:07,138 - database - INFO - Update: DELETE FROM story WHERE title LIKE %s OR title LIKE %s, params: ('PO_Test_%', 'SM_Test_%')
+2026-10-22 08:53:07,139 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:07,160 - database - INFO - Affected: 1
+2026-10-22 08:53:07,161 - database - INFO - Update: DELETE FROM sprint WHERE name LIKE %s, params: ('SM_Test_%',)
+2026-10-22 08:53:07,162 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:07,183 - database - INFO - Affected: 0

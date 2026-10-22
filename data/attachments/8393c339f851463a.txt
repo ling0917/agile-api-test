@@ -1,0 +1,14 @@
+2026-10-22 08:53:08,613 - request - INFO - POST: http://localhost:8084/auth/login, params: {'json': {'username': 'demo_dev', 'password': 'password'}}
+2026-10-22 08:53:08,703 - request - INFO - Status: 200
+2026-10-22 08:53:08,703 - database - INFO - Query: SELECT id, username, role, email, nickname FROM user WHERE username = %s, params: ('demo_dev',)
+2026-10-22 08:53:08,704 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:08,731 - database - INFO - Result: 1 rows
+2026-10-22 08:53:08,733 - database - INFO - Update: DELETE FROM project WHERE name LIKE %s OR name LIKE %s OR name = %s, params: ('PO_Test_%', 'SM_Test_%', 'DuplicateTest')
+2026-10-22 08:53:08,733 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:08,755 - database - INFO - Affected: 0
+2026-10-22 08:53:08,755 - database - INFO - Update: DELETE FROM story WHERE title LIKE %s OR title LIKE %s, params: ('PO_Test_%', 'SM_Test_%')
+2026-10-22 08:53:08,755 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:08,776 - database - INFO - Affected: 0
+2026-10-22 08:53:08,777 - database - INFO - Update: DELETE FROM sprint WHERE name LIKE %s, params: ('SM_Test_%',)
+2026-10-22 08:53:08,777 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:08,798 - database - INFO - Affected: 0

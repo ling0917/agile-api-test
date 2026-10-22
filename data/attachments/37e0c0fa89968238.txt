@@ -1,0 +1,3 @@
+ENV: type
+URL: http://localhost:8084
+DB: localhost:3307/agile

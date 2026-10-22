@@ -1,0 +1,9 @@
+2026-10-22 08:53:06,753 - database - INFO - Update: DELETE FROM project WHERE name LIKE %s OR name LIKE %s OR name = %s, params: ('PO_Test_%', 'SM_Test_%', 'DuplicateTest')
+2026-10-22 08:53:06,753 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:06,774 - database - INFO - Affected: 0
+2026-10-22 08:53:06,775 - database - INFO - Update: DELETE FROM story WHERE title LIKE %s OR title LIKE %s, params: ('PO_Test_%', 'SM_Test_%')
+2026-10-22 08:53:06,775 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:06,796 - database - INFO - Affected: 0
+2026-10-22 08:53:06,797 - database - INFO - Update: DELETE FROM sprint WHERE name LIKE %s, params: ('SM_Test_%',)
+2026-10-22 08:53:06,797 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:06,818 - database - INFO - Affected: 0

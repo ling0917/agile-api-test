@@ -1,0 +1,19 @@
+2026-10-22 08:53:07,798 - request - INFO - GET: http://localhost:8084/projects
+2026-10-22 08:53:07,809 - request - INFO - Status: 200
+2026-10-22 08:53:07,809 - request - INFO - POST: http://localhost:8084/sprints, params: {'json': {'projectId': 1, 'name': 'SM_Test_Sprint_DB', 'startDate': '2024-01-01', 'endDate': '2024-01-14', 'goal': ''}, 'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW1vX3NtIiwicm9sZSI6IlNDUlVNX01BU1RFUiIsInVzZXJJZCI6MiwiaWF0IjoxNzkyNjU5MTg0LCJleHAiOjE3OTI3NDU1ODR9.3Ymc0w3gGyEjeGZeSO8yoFAdzrNvgXQMlIjCQmZynaQ'}}
+2026-10-22 08:53:07,828 - request - INFO - Status: 200
+2026-10-22 08:53:07,828 - database - INFO - Query: SELECT * FROM sprint WHERE name = %s, params: ('SM_Test_Sprint_DB',)
+2026-10-22 08:53:07,829 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:07,853 - database - INFO - Result: 1 rows
+2026-10-22 08:53:07,855 - database - INFO - Query: SELECT name FROM sprint WHERE name = %s, params: ('SM_Test_Sprint_DB',)
+2026-10-22 08:53:07,855 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:07,876 - database - INFO - Result: 1 rows
+2026-10-22 08:53:07,877 - database - INFO - Update: DELETE FROM project WHERE name LIKE %s OR name LIKE %s OR name = %s, params: ('PO_Test_%', 'SM_Test_%', 'DuplicateTest')
+2026-10-22 08:53:07,877 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:07,898 - database - INFO - Affected: 0
+2026-10-22 08:53:07,899 - database - INFO - Update: DELETE FROM story WHERE title LIKE %s OR title LIKE %s, params: ('PO_Test_%', 'SM_Test_%')
+2026-10-22 08:53:07,899 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:07,920 - database - INFO - Affected: 0
+2026-10-22 08:53:07,921 - database - INFO - Update: DELETE FROM sprint WHERE name LIKE %s, params: ('SM_Test_%',)
+2026-10-22 08:53:07,921 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:07,943 - database - INFO - Affected: 1

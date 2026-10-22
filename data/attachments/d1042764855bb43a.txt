@@ -1,0 +1,11 @@
+2026-10-22 08:53:06,335 - request - INFO - GET: http://localhost:8084/stories/999999
+2026-10-22 08:53:06,353 - request - INFO - Status: 200
+2026-10-22 08:53:06,354 - database - INFO - Update: DELETE FROM project WHERE name LIKE %s OR name LIKE %s OR name = %s, params: ('PO_Test_%', 'SM_Test_%', 'DuplicateTest')
+2026-10-22 08:53:06,355 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:06,382 - database - INFO - Affected: 0
+2026-10-22 08:53:06,383 - database - INFO - Update: DELETE FROM story WHERE title LIKE %s OR title LIKE %s, params: ('PO_Test_%', 'SM_Test_%')
+2026-10-22 08:53:06,383 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:06,405 - database - INFO - Affected: 0
+2026-10-22 08:53:06,405 - database - INFO - Update: DELETE FROM sprint WHERE name LIKE %s, params: ('SM_Test_%',)
+2026-10-22 08:53:06,405 - database - INFO - DB: localhost:3307/agile
+2026-10-22 08:53:06,427 - database - INFO - Affected: 0
